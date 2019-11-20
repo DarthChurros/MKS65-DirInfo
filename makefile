@@ -1,5 +1,5 @@
 ifdef MEM
-	DATA  = -g
+	DATA = -g
 	VG = valgrind --leak-check=full
 endif
 
@@ -10,7 +10,7 @@ main.o: main.c
 	gcc $(DATA) -c main.c
 
 run:
-	$(VG) ./program
+	$(VG) ./program $(ARGS)
 
 clean:
 	rm *.o
