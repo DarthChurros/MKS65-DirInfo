@@ -15,5 +15,11 @@ int main(int argc, char** argv) {
     scanf("%s", dirname);
   }
   printf("\nDirectory: %s\n", dirname);
+
+  DIR* directory = opendir(dirname);
+  if (errno != 0) {
+    printf("Error %d: %s\n", errno, strerror(errno));
+    return errno;
+  }
   return 0;
 }
