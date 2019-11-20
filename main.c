@@ -58,7 +58,7 @@ int main(int argc, char** argv) {
 
   opendir(dirname);
   entry = readdir(directory);
-  printf("\nFiles\n");
+  printf("\nFiles:\n");
 
   while (entry) {
     if (entry->d_type == DT_REG) {
