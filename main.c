@@ -14,7 +14,7 @@ int main(int argc, char** argv) {
     printf("Please enter a directory to scan:\n");
     scanf("%s", dirname);
   }
-  printf("\nDirectory: %s\n", dirname);
+  printf("\nDirectory: %s\n\n\n", dirname);
 
   DIR* directory = opendir(dirname);
   //struct _dirdesc directory;
@@ -26,9 +26,25 @@ int main(int argc, char** argv) {
 
   struct dirent* entry;
   entry = readdir(directory);
+  printf("Directories:\n");
 
   while (entry) {
-    printf("\t%s\n", entry->d_name);
+    if (entry->d_type == DT_DIR) {
+      printf("\t%s\n", entry->d_name);
+    }
     entry = readdir(directory);
   }
+  closedir(directory);
+
+  opendir(dirname);
+  entry = readdir(directory);
+  printf("\nFiles\n");
+
+  while (entry) {
+    if (entry->d_type == DT_REG) {
+      printf("\t%s\n", entry->d_name);
+    }
+    entry = readdir(directory);
+  }
+
 }
