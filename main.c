@@ -17,9 +17,18 @@ int main(int argc, char** argv) {
   printf("\nDirectory: %s\n", dirname);
 
   DIR* directory = opendir(dirname);
+  //struct _dirdesc directory;
+
   if (errno != 0) {
     printf("Error %d: %s\n", errno, strerror(errno));
     return errno;
   }
-  return 0;
+
+  struct dirent* entry;
+  entry = readdir(directory);
+
+  while (entry) {
+    printf("\t%s\n", entry->d_name);
+    entry = readdir(directory);
+  }
 }
